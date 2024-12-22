@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+}
+
+.blog-post {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px 20px;
+}
+
+.blog-item {
+    background-color: #efefef;
+    width: calc(25% - 20px);
+    height: 150px;
+    margin-bottom: 60px;
+    margin-right: calc(80px / 3);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.blog-item:nth-child(4n) {
+    margin-right: 0;
+}
+
+.title {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #8646da;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+}
+
+.title h3 {
+    width: calc(80% - 10px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title .icon a {
+    margin-right: 10px;
+}
+
+.description {
+    background-color: #efefef;
+    height: calc(100% - 30px);
+    border-radius: 8px;
+    padding: 15px 10px;
+    width: 100%;
+}
+
+.description div {
+    width: 100%;
+    height: 90px;
+    color: black;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    line-clamp: 3;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.action {
+    margin-top: 30px;
+    padding: 10px;
+    display: flex;
+}
+
+.action a {
+    text-decoration: none
+}
+
+.create-blog {
+    background-color: #4096FF;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-delete i {
+    pointer-events: none;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.create.blog.css">
+    <title>Create blog</title>
+</head>
+<body>
+    <div class="create-blog-page">
+        <div class="container">
+            <h1 style="margin-bottom: 25px; text-align: center; color: blueviolet;">Create Blog</h1>
+            <form>
+                <label for="input-title" id="label-title">Title</label><br>
+                <input type="text" name="title" id="input-title">
+                <br><br><br>
+                <label for="input-description" class="label-des">Description</label><br>
+                <textarea name="description" id="input-description"></textarea>
+                <br><br><br>
+                <label for="input-content" class="label-content">Content</label><br>
+                <textarea name="content" id="input-content"></textarea>
+               <div class="btn-wrapped">
+                    <button class="btn">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body> 
+<script>
+
+    const date = new Date()
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    const today = `${year}-${month}-${day}`
+
+    const form = document.querySelector('form')
+    
+    if(form){
+        form.addEventListener('submit', async event => {
+            event.preventDefault()
+            const title = form.querySelector('#input-title').value
+            const description = form.querySelector('#input-description').value
+            const content = form.querySelector('#input-content').value  
+            await fetch('http://localhost:8080/api/blogs',{
+                method:"POST",  
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({
+                    title,
+                    description,
+                    content,
+                    published_date:today,
+                })
+            })
+            window.location.href='http://localhost:8080/blog'
+        })
+    }
+
+</script>
+</html> 

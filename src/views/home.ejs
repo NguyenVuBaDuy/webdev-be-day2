@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/style/style.blog.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="blog-page">
+        <div class="action">
+            <a class="create-blog" href="/blog/create-blog">Add new</a>
+        </div>
+        <div class="blog-post">
+            <% blogs.forEach(blog => { %>
+                <div class="blog-item" data-id="<%= blog.id %>" >
+                    <div class="title">
+                        <h3><%= blog.title %></h3>
+                        <div class="icon">
+                            <a href="/blog/<%= blog.id %>/edit"><i class="fa-solid fa-pencil" style="color: orange;"></i></a>
+                            <a class="btn-delete" data-id="<%= blog.id %>" ><i class="fa-solid fa-trash" style="color: red;"></i></a>
+                        </div>
+                    </div>
+                    <div class="description"><div><%= blog.description %></div></div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+
+<script>
+
+
+document.querySelectorAll('.btn-delete').forEach(button => {
+    button.addEventListener('click', async event => {
+        event.stopPropagation()
+        const id = event.currentTarget.getAttribute('data-id');
+        const res = await fetch(`/blog/${id}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (res.ok) {
+            button.closest('.blog-item').remove(); 
+        } else {
+            alert('Failed');
+        }
+    });
+});
+
+document.querySelectorAll('.fa-pencil').forEach(item => {
+    item.addEventListener('click', event => {
+        event.stopPropagation()
+    })
+})
+
+
+document.querySelectorAll('.blog-item').forEach(item => {
+    item.addEventListener('click', event => {
+        const id = event.currentTarget.getAttribute('data-id')
+        window.location.href='http://localhost:8080/blog/'+id
+    });
+});
+
+
+</script>
+
+</html>
